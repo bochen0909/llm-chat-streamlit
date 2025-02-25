@@ -22,9 +22,7 @@ class OllamaModel:
 
     def stream(self, messages):
         return self.client.stream(
-            [
-                _st_message_to_langchain_message(m) for m in messages
-            ]
+            [_st_message_to_langchain_message(m) for m in messages]
         )
 
 
@@ -44,13 +42,15 @@ class ChatGPTModel:
 class ChatBedrockModel:
     def __init__(self, credentials_profile_name: str, model_id: str):
         self.client = ChatBedrock(
-            credentials_profile_name=credentials_profile_name, model_id=model_id, streaming=True)
+            credentials_profile_name=credentials_profile_name,
+            model_id=model_id,
+            streaming=True,
+            model_kwargs={"temperature": 0.1, "max_tokens": 20000},
+        )
 
     def stream(self, messages):
         return self.client.stream(
-            [
-                _st_message_to_langchain_message(m) for m in messages
-            ]
+            [_st_message_to_langchain_message(m) for m in messages]
         )
 
 
@@ -61,8 +61,10 @@ def create_model(_: str, model_config: dict):
             raise ValueError("OPENAI_API_KEY environment variable is not set")
         return ChatGPTModel(api_key=api_key, model=model_config["model_id"])
     elif model_config["type"] == "bedrock":
-        return ChatBedrockModel(credentials_profile_name=model_config["credentials_profile_name"],
-                                model_id=model_config["model_id"])
+        return ChatBedrockModel(
+            credentials_profile_name=model_config["credentials_profile_name"],
+            model_id=model_config["model_id"],
+        )
     elif model_config["type"] == "ollama":
         return OllamaModel(model_id=model_config["model_id"])
     else:

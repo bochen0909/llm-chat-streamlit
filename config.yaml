@@ -9,11 +9,30 @@ models:
     model_id: "anthropic.claude-3-sonnet-20240229-v1:0"
     credentials_profile_name: "default" # ensure AWS credentials are set in ~/.aws/credentials and can access the model
 
+  bedrock-claude-3.5-sonnet-20240620-v1:
+    type: "bedrock"
+    model_id: "anthropic.claude-3-5-sonnet-20240620-v1:0"
+    credentials_profile_name: "foodgenius" # ensure AWS credentials are set in ~/.aws/credentials and can access the model
+
+  bedrock-anthropic.claude-3-7-sonnet-20250219-v1:
+    type: "bedrock"
+    model_id: "anthropic.claude-3-7-sonnet-20250219-v1:0"
+    credentials_profile_name: "foodgenius" # ensure AWS credentials are set in ~/.aws/credentials and can access the model
+
   ollama-mistral:
     type: "ollama"
     model_id: "mistral" # make sure the model is available for ollama
 
-default_model: "chatgpt-3.5-turbo"
+  ollama-deepseek-r1-8b:
+    type: "ollama"
+    model_id: "deepseek-r1:8b" # make sure the model is available for ollama
+
+  ollama-llama3.1finetune:
+    type: "ollama"
+    model_id: "llama3.1finetune" # make sure the model is available for ollama
+
+
+default_model: "bedrock-anthropic.claude-3-7-sonnet-20250219-v1"
 
 # folder to store chat history
 history_folder: "./history"
