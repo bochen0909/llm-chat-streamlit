@@ -73,8 +73,16 @@ if prompt := st.chat_input("What is up?"):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    with st.chat_message("assistant"):
-        stream = client.stream(chat_session.messages)
-        response = st.write_stream(stream)
+    try:
+        with st.chat_message("assistant"):
+            stream = client.stream(chat_session.messages)
+            response = st.write_stream(stream)
+    except Exception as e:
+        print(f"Error: {e}")
+        client.reset()
+        with st.chat_message("assistant"):
+            stream = client.stream(chat_session.messages)
+            response = st.write_stream(stream)
+            
     chat_session.add_message("assistant", response)
     chat_session.save_history()

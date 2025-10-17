@@ -8,16 +8,36 @@ models:
     type: "bedrock"
     model_id: "anthropic.claude-3-sonnet-20240229-v1:0"
     credentials_profile_name: "default" # ensure AWS credentials are set in ~/.aws/credentials and can access the model
+    stream: true
 
   bedrock-claude-3.5-sonnet-20240620-v1:
     type: "bedrock"
     model_id: "anthropic.claude-3-5-sonnet-20240620-v1:0"
     credentials_profile_name: "foodgenius" # ensure AWS credentials are set in ~/.aws/credentials and can access the model
+    stream: true
 
   bedrock-anthropic.claude-3-7-sonnet-20250219-v1:
     type: "bedrock"
     model_id: "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
     credentials_profile_name: "foodgenius" # ensure AWS credentials are set in ~/.aws/credentials and can access the model
+    stream: true
+
+  bedrock-anthropic.claude-sonnet-4-5-20250929-v1:
+    type: "bedrock"
+    # model_id: "anthropic.claude-sonnet-4-5-20250929-v1:0"
+    model_id: "global.anthropic.claude-sonnet-4-5-20250929-v1:0"
+    credentials_profile_name: "ama_app_mlopsengnr_sr_np_dev-850098217927" # ensure AWS credentials are set in ~/.aws/credentials and can access the model
+    region: "us-west-2"
+    sso: true
+    stream: false
+
+  bedrock-anthropic.claude-sonnet-4-20250514-v1:
+    type: "bedrock"
+    model_id: "us.anthropic.claude-sonnet-4-20250514-v1:0"
+    credentials_profile_name: "ama_app_mlopsengnr_sr_np_dev-850098217927" # ensure AWS credentials are set in ~/.aws/credentials and can access the model
+    region: "us-west-2"
+    sso: true
+    stream: true
 
   ollama-mistral:
     type: "ollama"
@@ -32,7 +52,9 @@ models:
     model_id: "llama3.1finetune" # make sure the model is available for ollama
 
 
-default_model: "bedrock-anthropic.claude-3-7-sonnet-20250219-v1"
+# default_model: "bedrock-anthropic.claude-3-7-sonnet-20250219-v1"
+default_model: "bedrock-anthropic.claude-sonnet-4-20250514-v1"
 
 # folder to store chat history
 history_folder: "./history"
+
